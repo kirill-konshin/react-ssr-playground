@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import Head from "next/head";
 
-export default (({children, reduxStatus, title = 'Wat?'}) => (
+export default connect(state => state)(({children, reduxStatus, title = 'Wat?'}) => (
     <div className="container">
         <Head>
             <title>{title} | Next</title>

@@ -1,14 +1,15 @@
 import React from "react";
+import {connect} from "react-redux";
 import Link from "next/link";
 import {makeStore} from "../lib/store";
-import connectToProvider from "../lib/connectToProvider";
+import provide from "../lib/provide";
 import Layout from "../components/Layout";
 
 class Page extends React.Component {
 
     static getInitialProps({store, isServer, pathname, query}) {
 
-        console.log('2. Page.getInitialProps uses the store to dispatch things, pathname', pathname, 'query', query);
+        // console.log('2. Page.getInitialProps uses the store to dispatch things, pathname', pathname, 'query', query);
 
         // If it's a server, then all async actions must be done before return or return a promise
         if (isServer) {
@@ -28,7 +29,7 @@ class Page extends React.Component {
     }
 
     render() {
-        console.log('5. Page.render');
+        // console.log('5. Page.render');
         return (
             <Layout title="Index">
                 <h2>Index</h2>
@@ -41,6 +42,7 @@ class Page extends React.Component {
 
 }
 
-Page = connectToProvider(makeStore, state => state)(Page);
+Page = connect(state => state)(Page);
+Page = provide(makeStore)(Page); // note that provide should be last
 
 export default Page;
