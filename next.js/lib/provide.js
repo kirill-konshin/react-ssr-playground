@@ -1,5 +1,5 @@
 import React from "react";
-import {Provider} from "react-redux";
+import {connect, Provider} from "react-redux";
 
 let memoizedStore;
 
@@ -19,9 +19,12 @@ const initStore = (makeStore, isServer, initialState) => {
 
 };
 
-export default (createStore) => {
+export default (createStore, ...connectArgs) => {
 
     return (Cmp) => {
+
+        // Since provide should always be after connect we connect here
+        const ConnectedCmp = connect(...connectArgs)(Cmp);
 
         const WrappedCmp = ({initialState, isServer, store, ...props}) => {
 
@@ -34,16 +37,12 @@ export default (createStore) => {
 
             return (
                 <Provider store={store}>
-                    <Cmp {...props}/>
+                    <ConnectedCmp {...props}/>
                 </Provider>
             );
 
         };
 
-        /**
-         * @param dialog
-         * @return {{store, isServer: boolean, initialState}}
-         */
         WrappedCmp.getInitialProps = async(dialog) => {
 
             const isServer = !!dialog.req;

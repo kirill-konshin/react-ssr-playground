@@ -1,5 +1,4 @@
 import React from "react";
-import {connect} from "react-redux";
 import Link from "next/link";
 import {makeStore} from "../lib/store";
 import provide from "../lib/provide";
@@ -45,7 +44,6 @@ class Page extends React.Component {
 
 }
 
-Page = connect(state => state)(Page);
-Page = provide(makeStore)(Page); // note that provide should be last
+Page = provide(makeStore, state => state)(Page);
 
 export default Page;
