@@ -17,7 +17,7 @@ class Page extends React.Component {
             return new Promise((res) => {
                 setTimeout(() => {
                     store.dispatch({type: 'TICK', payload: 'server'});
-                    res();
+                    res({custom: 'custom from server'});
                 }, 200);
             });
 
@@ -25,6 +25,8 @@ class Page extends React.Component {
 
         // If it's a client, then it does not matter because client can be progressively rendered
         store.dispatch({type: 'TICK', payload: 'client'});
+
+        return {custom: 'custom'};
 
     }
 
@@ -34,6 +36,7 @@ class Page extends React.Component {
             <Layout title="Index">
                 <h2>Index</h2>
                 <div>Redux status: {this.props.reduxStatus}</div>
+                <div>Custom: {this.props.custom}</div>
                 <Link href="/other"><a>Navigate</a></Link>
             </Layout>
 

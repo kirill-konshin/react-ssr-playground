@@ -51,8 +51,10 @@ export default (createStore) => {
 
             // console.log('1. WrappedCmp.getInitialProps wrapper creates the store');
 
+            let initialProps = {};
+
             if (Cmp.getInitialProps) {
-                await Cmp.getInitialProps.call(Cmp, {...dialog, isServer, store});
+                initialProps = (await Cmp.getInitialProps.call(Cmp, {...dialog, isServer, store})) || {};
             }
 
             // console.log('3. WrappedCmp.getInitialProps has store state', store.getState());
@@ -60,7 +62,8 @@ export default (createStore) => {
             return {
                 store,
                 isServer,
-                initialState: store.getState()
+                initialState: store.getState(),
+                ...initialProps
             };
 
         };
