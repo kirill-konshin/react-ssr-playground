@@ -1,7 +1,8 @@
 import React from "react";
+import Link from "next/link";
 import {makeStore} from "../lib/store";
 import connectToProvider from "../lib/connectToProvider";
-import Link from "next/link";
+import Layout from "../components/Layout";
 
 class Page extends React.Component {
 
@@ -29,11 +30,12 @@ class Page extends React.Component {
     render() {
         console.log('5. Page.render');
         return (
-            <div>
-                <h1>Index</h1>
+            <Layout title="Index">
+                <h2>Index</h2>
                 <div>Redux status: {this.props.reduxStatus}</div>
                 <Link href="/other"><a>Navigate</a></Link>
-            </div>
+            </Layout>
+
         )
     }
 

@@ -2,16 +2,24 @@
   "name": "with-redux",
   "version": "1.0.0",
   "scripts": {
-    "start": "next",
-    "build": "next build",
-    "server": "next start"
+    "start": "nf start sass,next",
+    "sass": "node-sass --recursive --source-map=true --output-style=compressed --output ./static ./static",
+    "sass-watch": "npm run sass -- --watch --quiet --output-style=nested",
+    "build": "npm run sass && next build",
+    "next-dev": "next",
+    "next-server": "next start"
   },
   "dependencies": {
-    "next": "^2.0.0-beta",
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "bootstrap": "^4.0.0-alpha.6",
+    "foreman": "^2.0.0",
+    "next": "^2.0.0-beta",
+    "node-sass": "^4.5.0"
+  }
 }

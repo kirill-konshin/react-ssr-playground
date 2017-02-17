@@ -1,0 +1,3 @@
+# https://github.com/strongloop/node-foreman
+next: npm run next-dev
+sass: npm run sass-watch
