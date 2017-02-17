@@ -1,0 +1,5 @@
+.idea
+.next
+build
+node_modules
+npm-debug*
