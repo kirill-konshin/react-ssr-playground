@@ -26,7 +26,7 @@ export default (createStore, ...connectArgs) => {
         // Since provide should always be after connect we connect here
         const ConnectedCmp = connect(...connectArgs)(Cmp);
 
-        const WrappedCmp = ({initialState, isServer, store, ...props}) => {
+        const WrappedCmp = ({store, isServer, initialState, initialProps}) => {
 
             if (!store || !store.dispatch) {
                 store = initStore(createStore, isServer, initialState);
@@ -37,7 +37,7 @@ export default (createStore, ...connectArgs) => {
 
             return (
                 <Provider store={store}>
-                    <ConnectedCmp {...props}/>
+                    <ConnectedCmp {...initialProps}/>
                 </Provider>
             );
 
@@ -62,7 +62,7 @@ export default (createStore, ...connectArgs) => {
                 store,
                 isServer,
                 initialState: store.getState(),
-                ...initialProps
+                initialProps
             };
 
         };
