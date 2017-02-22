@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
+import withRedux from "next-redux-wrapper";
 import {makeStore} from "../lib/store";
-import provide from "../lib/provide";
 import Layout from "../components/Layout";
 
 class Page extends React.Component {
@@ -44,6 +44,6 @@ class Page extends React.Component {
 
 }
 
-Page = provide(makeStore, state => state)(Page);
+Page = withRedux(makeStore, state => state)(Page);
 
 export default Page;

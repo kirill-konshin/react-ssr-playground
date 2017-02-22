@@ -3,10 +3,7 @@ import {connect} from "react-redux";
 import {barAction} from "../redux/actions";
 import Helmet from "./Helmet";
 
-@connect(state => ({
-    foo: state.foo,
-    bar: state.bar
-}), {barAction})
+@connect(state => state, {barAction})
 export default class App extends Component {
 
     /**
@@ -17,9 +14,8 @@ export default class App extends Component {
      * @param store
      * @return {Promise}
      */
-    static fetchData({location, params, history, store}) {
-        const action = barAction();
-        store.dispatch(action);
+    static getInitialProps({location, params, history, store}) {
+        const action = store.dispatch(barAction());
         return action.payload;
     };
 

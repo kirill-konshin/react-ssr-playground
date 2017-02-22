@@ -2,10 +2,10 @@
   "name": "with-redux",
   "version": "1.0.0",
   "scripts": {
-    "start": "nf start sass,next",
-    "sass": "node-sass --recursive --source-map=true --output-style=compressed --output ./static ./static",
-    "sass-watch": "npm run sass -- --watch --quiet --output-style=nested",
+    "start": "npm run sass-watch & npm run next-dev",
     "build": "npm run sass && next build",
+    "sass": "node-sass --recursive --source-map=true --output-style=compressed --output ./static ./static",
+    "sass-watch": "npm run sass && npm run sass -- --watch --quiet --output-style=nested",
     "next-dev": "next",
     "next-server": "next start"
   },
@@ -18,8 +18,8 @@
   "license": "ISC",
   "devDependencies": {
     "bootstrap": "^4.0.0-alpha.6",
-    "foreman": "^2.0.0",
     "next": "^2.0.0-beta",
+    "next-redux-wrapper": "^1.0.0",
     "node-sass": "^4.5.0"
   }
 }

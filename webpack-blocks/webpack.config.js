@@ -1,4 +1,4 @@
-const {createConfig, defineConstants, env, entryPoint, setOutput, sourceMaps, addPlugins, setContext} = require('@webpack-blocks/webpack2');
+const {createConfig, defineConstants, env, entryPoint, setOutput, sourceMaps, addPlugins} = require('@webpack-blocks/webpack2');
 const babel = require('@webpack-blocks/babel6');
 const devServer = require('@webpack-blocks/dev-server2');
 const postcss = require('@webpack-blocks/postcss');
@@ -87,7 +87,7 @@ module.exports = createConfig([
         }),
         new webpack.LoaderOptionsPlugin({
             options: {
-                context: process.cwd() // this is required for LESS/SASS sourcemaps
+                context: '/' // this is required for LESS/SASS sourcemaps
             }
         }),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/) // prevents moment from loading all locales
