@@ -10,6 +10,8 @@
     "next-server": "next start"
   },
   "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6",
+    "next-redux-wrapper": "^1.0.0",
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0"
@@ -17,9 +19,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "bootstrap": "^4.0.0-alpha.6",
     "next": "^2.0.0-beta",
-    "next-redux-wrapper": "^1.0.0",
     "node-sass": "^4.5.0"
   }
 }

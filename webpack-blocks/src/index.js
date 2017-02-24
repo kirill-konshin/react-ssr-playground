@@ -5,8 +5,7 @@ import React from "react";
 import {render} from "react-dom";
 import {Provider} from "react-redux";
 
-// import "./styles/styles.less";
-import "./styles/styles.scss";
+import "./styles/styles.sass";
 
 import createRouter from "./router";
 import createStore from "./redux/createStore";

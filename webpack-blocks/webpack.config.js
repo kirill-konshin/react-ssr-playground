@@ -9,7 +9,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const AppCachePlugin = require('appcache-webpack-plugin');
 const StatsPlugin = require("stats-webpack-plugin");
 const webpack = require("webpack");
-const less = require("./lessBlock");
 const excludeFromStats = [
     /node_modules[\\\/]react(-.*)?[\\\/]/,
     /node_modules[\\\/]redux(-.*)?[\\\/]/,
@@ -69,9 +68,8 @@ module.exports = createConfig([
         ])
     ]),
     sourceMaps(),
-    less({strictMath: true, sourceMap: true}),
     sass({relative_assets: true, sourceMap: true}),
-    extractText('[name].css', 'text/x-sass'), // change to x-less if less is used
+    extractText('[name].css', 'text/x-sass'),
     addPlugins([
         new HtmlWebpackPlugin({
             filename: 'index.html',
@@ -87,7 +85,7 @@ module.exports = createConfig([
         }),
         new webpack.LoaderOptionsPlugin({
             options: {
-                context: '/' // this is required for LESS/SASS sourcemaps
+                context: '/' // this is required for PostCSS + SASS/LESS w/sourcemaps
             }
         }),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/) // prevents moment from loading all locales
