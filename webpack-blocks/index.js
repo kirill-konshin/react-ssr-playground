@@ -4,9 +4,7 @@ import Express from "express";
 import React from "react";
 import {Provider} from "react-redux";
 import {renderToString} from "react-dom/server";
-import {match, RouterContext} from "react-router";
-import createMemoryHistory from "history/createMemoryHistory";
-import {createLocation} from "history/LocationUtils";
+import {match, RouterContext, createMemoryHistory} from "react-router";
 import webpack from "webpack";
 import Server from "webpack-dev-server";
 import createRoutes from "./src/router";
@@ -86,7 +84,7 @@ function handleRender(options) {
             foo: Date.now() // pre-populate something right here
         });
 
-        const location = createLocation(req.url);
+        const location = history.createLocation(req.url);
 
         if (options.fs.existsSync(path.join(config.output.path, location.pathname)) &&
             location.pathname !== '/' &&
@@ -115,6 +113,7 @@ function handleRender(options) {
             (new Promise((resolve) => {
 
                 const {location, params} = renderProps;
+
                 const Cmp = renderProps.components[renderProps.components.length - 1].WrappedComponent;
 
                 if (!Cmp || !Cmp.getInitialProps) {

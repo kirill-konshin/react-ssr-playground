@@ -14,9 +14,8 @@ export default class App extends Component {
      * @param store
      * @return {Promise}
      */
-    static getInitialProps({location, params, history, store}) {
-        const action = store.dispatch(barAction());
-        return action.payload;
+    static async getInitialProps({location, params, history, store}) {
+        return await store.dispatch(barAction());
     };
 
     render() {
