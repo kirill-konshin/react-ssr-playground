@@ -5,7 +5,7 @@ export default function WrappedHelmet(props) {
 
     return (
         <Helmet
-            defaultTitle='Hey Ho'
+            defaultTitle='Wat?'
             titleTemplate="%s | Webpack Blocks"
             {...props}
         />

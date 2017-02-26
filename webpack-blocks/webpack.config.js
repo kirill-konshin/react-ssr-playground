@@ -46,6 +46,7 @@ module.exports = createConfig([
     env('development', [
         devServer({
             port: process.env.PORT || 3000,
+            contentBase: './src',
             stats: {
                 excludeFromStats: excludeFromStats,
                 colors: true
