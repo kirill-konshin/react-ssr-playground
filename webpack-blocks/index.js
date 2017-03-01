@@ -2,6 +2,7 @@ import path from "path";
 import Express from "express";
 import webpack from "webpack";
 import Server from "webpack-dev-server";
+import striptags from "striptags";
 import createRouter from "./src/router";
 import createStore from "./src/redux/createStore";
 import config from "./webpack.config";
@@ -16,14 +17,31 @@ function isDevServer() {
 }
 
 const options = {
-    createRouter: createRouter,
-    createStore: createStore,
-    initialState: {
-        foo: Date.now() // pre-populate something right here
-    },
+    createRouter: (history) => (createRouter(history)),
+    createStore: ({req, res}) => (createStore({
+        foo: req.url + ':' + Date.now()
+    })),
     initialStateKey: '__PRELOADED_STATE__',
-    mountNode: '<div id="app"></div>',
-    mountNodeTemplate: (html) => `<div id="app">${html}</div>`,
+    template: ({template, html, req}) => {
+
+        template = template.replace(
+            `<div id="app"></div>`,
+            `<div id="app">${html}</div>`
+        );
+
+        const match = /<h1[^>]*>(.*?)<\/h1>/gi.exec(html);
+
+        if (match) {
+            const title = match[1];
+            template = template.replace(
+                /<title>.*?<\/title>/g,
+                '<title>' + striptags(match[1]) + '</title>'
+            );
+        }
+
+        return template;
+
+    },
     templatePath: path.join(config.output.path, 'index.html'),
     outputPath: config.output.path,
     debug: true

@@ -23,7 +23,8 @@ export default class App extends Component {
         return (
             <div className="container">
                 <Helmet title='Index'/>
-                <h1>Foo {foo}, Bar {bar}</h1>
+                <h1>Index</h1>
+                <div>Foo {foo}, Bar {bar}</div>
             </div>
         );
     }
