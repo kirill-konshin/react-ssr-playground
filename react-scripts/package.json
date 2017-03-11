@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
+    "babel-plugin-transform-ensure-ignore": "^0.1.0",
     "express": "^4.15.2",
     "node-sass": "^4.5.0",
     "npm-run-all": "^4.0.2",
@@ -28,10 +29,9 @@
     "dev": "react-scripts start",
     "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "server": "NODE_ENV=production babel-node --presets=react-app ./server.js",
-    "build-schema": "NODE_ENV=development babel-node ./build-schema.js",
+    "server": "NODE_ENV=production babel-node --presets=react-app --plugins=transform-ensure-ignore ./server.js",
     "build-css": "node-sass --recursive  --source-map=true --output src/ src/",
     "watch-css": "npm run build-css && npm run build-css --- --watch",
-    "start": "npm-run-all -p dev watch-css server"
+    "start": "npm-run-all -p dev watch-css"
   }
 }
