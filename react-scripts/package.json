@@ -27,11 +27,12 @@
   },
   "scripts": {
     "dev": "react-scripts start",
-    "build": "npm run build-css && react-scripts build",
+    "build": "npm run build-css && react-scripts build && npm run build-server",
     "test": "react-scripts test --env=jsdom",
-    "server": "NODE_ENV=production babel-node --presets=react-app --plugins=transform-ensure-ignore ./server.js",
-    "build-css": "node-sass --recursive  --source-map=true --output src/ src/",
+    "build-server": "NODE_ENV=production babel --source-maps --out-dir build-lib src",
+    "build-css": "node-sass --recursive  --source-map=true --output src src",
     "watch-css": "npm run build-css && npm run build-css --- --watch",
+    "server": "node ./build-lib/server.js",
     "start": "npm-run-all -p dev watch-css"
   }
 }

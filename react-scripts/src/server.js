@@ -2,8 +2,8 @@ import path from "path";
 import express from "express";
 import striptags from "striptags";
 import {createExpressMiddleware, skipRequireExtensions} from "react-router-redux-middleware";
-import createRouter from "./src/router";
-import createStore from "./src/redux";
+import createRouter from "./router";
+import createStore from "./redux";
 
 const PORT = 3000;
 const app = express();

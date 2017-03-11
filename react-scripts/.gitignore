@@ -1,6 +1,7 @@
 node_modules
 coverage
 build
+build-lib
 .DS_Store
 .env
 npm-debug.log*
