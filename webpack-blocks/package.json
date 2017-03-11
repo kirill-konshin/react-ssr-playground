@@ -43,7 +43,6 @@
   "dependencies": {
     "bootstrap": "^4.0.0-alpha",
     "es6-promise": "^4.0.5",
-    "express": "^4.14.1",
     "isomorphic-fetch": "^2.2.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",

@@ -1,0 +1,91 @@
+schema {
+  query: BlogSchema
+  mutation: BlogMutations
+}
+
+# Represent the type of an author of a blog post or a comment
+type Author {
+  _id: String
+  name: String
+  twitterHandle: String
+}
+
+type BlogMutations {
+  # Create a new blog post
+  createPost(
+    _id: String!
+    title: String!
+    content: String!
+    summary: String
+    category: Category
+
+    # Id of the author
+    author: String!
+  ): Post
+
+  # Create a new author
+  createAuthor(_id: String!, name: String!, twitterHandle: String): Author
+}
+
+# Root of the Blog Schema
+type BlogSchema {
+  # List of posts in the blog
+  posts(category: Category): [Post]
+
+  # Latest post in the blog
+  latestPost: Post
+
+  # Recent posts in the blog
+  recentPosts(
+    # Number of recent items
+    count: Int!
+  ): [Post]
+
+  # Post by _id
+  post(_id: String!): Post
+
+  # Available authors in the blog
+  authors: [Author]
+
+  # Author by _id
+  author(_id: String!): Author
+}
+
+# A Category of the blog
+enum Category {
+  METEOR
+  PRODUCT
+  USER_STORY
+  OTHER
+}
+
+# Represent the type of a comment
+type Comment implements HasAuthor {
+  _id: String
+  content: String
+  author: Author
+  timestamp: Float
+
+  # Replies for the comment
+  replies: [Comment]
+}
+
+# This type has an author
+interface HasAuthor {
+  author: Author
+}
+
+# Represent the type of a blog post
+type Post implements HasAuthor {
+  _id: String
+  title: String
+  category: Category
+  summary: String
+  content: String
+  timestamp: Float
+  comments(
+    # Limit the comments returing
+    limit: Int
+  ): [Comment]
+  author: Author
+}

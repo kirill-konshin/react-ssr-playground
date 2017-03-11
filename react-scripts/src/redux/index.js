@@ -4,9 +4,9 @@ import thunk from "redux-thunk";
 import promiseMiddleware from "redux-promise-middleware";
 import reducers from "./reducers";
 
-export default function configureStore(initialState) {
+const isBrowser = (typeof window !== 'undefined');
 
-    const isBrowser = (typeof window !== 'undefined');
+export default function configureStore(initialState) {
 
     let middlewares = [
         promiseMiddleware({
@@ -32,12 +32,12 @@ export default function configureStore(initialState) {
 
     //TODO Persist something to localStorage as example
 
-    if (module.hot) {
-        module.hot.accept('./reducers', () => {
-            const nextReducers = require('./reducers').default;
-            store.replaceReducer(nextReducers);
-        });
-    }
+    // if (module.hot) {
+    //     module.hot.accept('./reducers', () => {
+    //         const nextReducers = require('./reducers').default;
+    //         store.replaceReducer(nextReducers);
+    //     });
+    // }
 
     return store;
 
