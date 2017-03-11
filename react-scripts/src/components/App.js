@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {barAction} from "../redux/actions";
+import {barAction} from "../redux";
 import Helmet from "./Helmet";
 
 export class App extends Component {
