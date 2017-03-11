@@ -1,6 +1,6 @@
 import path from "path";
 import express from "express";
-import striptags from "striptags";
+import {rewind} from "react-helmet";
 import {createExpressMiddleware, skipRequireExtensions} from "react-router-redux-middleware";
 import createRouter from "./router";
 import createStore from "./redux";
@@ -19,22 +19,22 @@ app.use(createExpressMiddleware({
     initialStateKey: '__PRELOADED_STATE__',
     template: ({template, html, req}) => {
 
-        template = template.replace(
-            `<div id="root"></div>`,
-            `<div id="root">${html}</div>`
-        );
+        //@see https://github.com/nfl/react-helmet#server-usage
+        const head = rewind();
 
-        const match = /<h1[^>]*>(.*?)<\/h1>/gi.exec(html);
-
-        if (match) {
-            const title = match[1];
-            template = template.replace(
+        return template
+            .replace(
+                `<div id="root"></div>`,
+                `<div id="root">${html}</div>`
+            )
+            .replace(
                 /<title>.*?<\/title>/g,
-                '<title>' + striptags(match[1]) + '</title>'
+                head.title.toString()
+            )
+            .replace(
+                /<html>/g,
+                '<html ' + head.htmlAttributes.toString() + '>'
             );
-        }
-
-        return template;
 
     },
     templatePath: path.join(outputPath, 'index.html'),
