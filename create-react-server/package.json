@@ -21,7 +21,7 @@
     "express": "^4.15.2",
     "node-sass": "^4.5.0",
     "npm-run-all": "^4.0.2",
-    "react-router-redux-middleware": "^1.1.0",
+    "create-react-server": "^0.1.0",
     "react-scripts": "0.9.5",
     "striptags": "^3.0.1"
   },
